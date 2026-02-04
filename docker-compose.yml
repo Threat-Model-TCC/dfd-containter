@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql2022_db
+    ports:
+      - "1445:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SuaSenhaForte123!
+      - MSSQL_PID=Developer
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: always
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "SuaSenhaForte123!", "-C", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 15s
+
+  sqlserver-setup:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_setup
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    command:
+      - /bin/bash
+      - -c
+      - |
+        echo "SQL Server pronto! Criando banco dfd_db..."
+        /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P 'SuaSenhaForte123!' -C -Q "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'dfd_db') CREATE DATABASE dfd_db;"
+        echo "Banco dfd_db criado com sucesso!"
+
+  backend:
+    build:
+      context: ./ThreatModelDfdService
+      dockerfile: Dockerfile
+    container_name: dfd_backend
+    ports:
+      - "5000:8080"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MSSQLServerConnection__MSSQLServerConnectionString=Data Source=sqlserver,1433;Initial Catalog=dfd_db;User Id=sa;Password=SuaSenhaForte123!;Encrypt=True;TrustServerCertificate=True;
+
+volumes:
+  sql_data:
