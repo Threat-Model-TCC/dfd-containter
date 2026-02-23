@@ -4,10 +4,11 @@ namespace ThreatModelDfdService.Data.DTO;
 
 public record DfdElementResponseDTO(
     long Id,
-    string ElementName,
+    string Name,
     DfdElementType Type,
-    decimal PositionX,
-    decimal PositionY,
+    decimal XValue,
+    decimal YValue,
     decimal Width,
-    decimal Height
+    decimal Height,
+    long? DfdChildId
 );

@@ -24,7 +24,7 @@ public class DfdElementService(
             dbElement.Width = dto.Width;
             dbElement.Height = dto.Height;
 
-            dfdElementRepository.Update(dbElement);
+            await dfdElementRepository.UpdateAsync(dbElement);
         }
         else
         {

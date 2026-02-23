@@ -31,6 +31,12 @@ public class GenericRepository<T> : IRepository<T> where T : BaseEntity
         return t;
     }
 
+    public async Task<T> UpdateAsync(T t)
+    {
+        dataset.Update(t); 
+        return await Task.FromResult(t);
+    }
+
     public List<T> FindAll()
     {
         return dataset.ToList() ;

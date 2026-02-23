@@ -8,6 +8,8 @@ public interface IRepository<T> where T : BaseEntity
 
     Task<T> CreateAsync(T t);
 
+    Task<T> UpdateAsync(T t);
+
     T FindById(long id);
 
     List<T> FindAll();

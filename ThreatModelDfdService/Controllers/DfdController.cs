@@ -23,14 +23,15 @@ public class DfdController(DfdService service) : ControllerBase
     }
 
     [HttpPut("{id}/elements")]
-    public async Task<IActionResult> UpdateElements(long id, [FromBody] List<UpsertDfdElementDTO> elements)
+    public async Task<ActionResult<List<DfdElementResponseDTO>>> UpdateElements(
+        long id, [FromBody] List<UpsertDfdElementDTO> elements)
     {
-        await service.SyncElementsAsync(id, elements);
-        return NoContent();
+        var result = await service.SyncElementsAsync(id, elements);
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<List<DfdElementResponseDTO>> GetDfdById(long id)
+    public ActionResult<DfdDTO> GetDfdById(long id)
     {
         return Ok(service.GetDfdById(id));
     }
