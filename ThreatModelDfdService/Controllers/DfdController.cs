@@ -15,6 +15,13 @@ public class DfdController(DfdService service) : ControllerBase
         return CreatedAtAction(null, null, payload);
     }
 
+    [HttpPost("child")]
+    public ActionResult<DfdDTO> CreateDfdChild([FromBody] CreateDfdChildDTO dto)
+    {
+        DfdDTO payload = service.CreateChildDfd(dto);
+        return CreatedAtAction(null, null, payload);
+    }
+
     [HttpPut("{id}/elements")]
     public async Task<IActionResult> UpdateElements(long id, [FromBody] List<UpsertDfdElementDTO> elements)
     {

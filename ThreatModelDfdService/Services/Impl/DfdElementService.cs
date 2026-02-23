@@ -7,7 +7,11 @@ using ThreatModelDfdService.Repositories;
 
 namespace ThreatModelDfdService.Services;
 
-public class DfdElementService(IRepository<DfdElement> dfdElementRepository, DfdElementMapper dfdElementMapper, MSSQLContext _context)
+public class DfdElementService(
+    IRepository<DfdElement> dfdElementRepository,
+    DfdElementMapper dfdElementMapper,
+    MSSQLContext _context
+)
 {
     public async Task CreateOrUpdateAsync(long dfdId, UpsertDfdElementDTO dto)
     {
