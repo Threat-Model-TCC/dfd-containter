@@ -50,7 +50,7 @@ public class DfdService(DfdElementService dfdElementService, MSSQLContext contex
     public DfdDTO GetDfdById(long id)
     {
         Dfd? dfd = context.Dfds.Find(id);
-        if (dfd == null) throw new Exception("DFD não encontrado.");
+        if (dfd == null) throw new KeyNotFoundException("DFD not found with the provided ID: " + id);
 
         return new DfdDTO(dfd.Id, dfd.DfdParentId, dfd.LevelNumber, dfdElementService.GetDfdElementsByDfdId(id));
     }

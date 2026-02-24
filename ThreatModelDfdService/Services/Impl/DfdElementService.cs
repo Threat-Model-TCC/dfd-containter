@@ -39,7 +39,8 @@ public class DfdElementService(
             DfdElementType.Process => new Process(),
             DfdElementType.Actor => new Actor(),
             DfdElementType.DataStore => new DataStore(),
-            _ => throw new ArgumentException("Tipo inválido.")
+            _ => throw new ArgumentException(
+                "Dfd element type is not valid. | Name: " + dto.Name + " Type: " + dto.Type)
         };
 
         newEntity.DfdId = dfdId;
@@ -74,6 +75,6 @@ public class DfdElementService(
 
     public void ValidateDfdElementExists(DfdElement dfdElement)
     {
-        if(dfdElement == null) throw new KeyNotFoundException("Element not found.");
+        if(dfdElement == null) throw new KeyNotFoundException("Dfd element does not exist.");
     }
 }
