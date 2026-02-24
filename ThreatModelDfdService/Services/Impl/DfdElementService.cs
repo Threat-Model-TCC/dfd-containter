@@ -74,6 +74,6 @@ public class DfdElementService(
 
     public void ValidateDfdElementExists(DfdElement dfdElement)
     {
-        if(dfdElement == null) throw new KeyNotFoundException("Element not found.");
+        if(dfdElement == null) throw new KeyNotFoundException("Dfd element does not exist.");
     }
 }
