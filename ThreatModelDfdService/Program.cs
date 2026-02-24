@@ -1,4 +1,5 @@
 using ThreatModelDfdService.Configs;
+using ThreatModelDfdService.Exceptions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddSerilogConfiguration();
@@ -23,6 +24,8 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = string.Empty;
     });
 }
+
+app.UseMiddleware<GlobalExceptionHandler>();
 
 app.UseHttpsRedirection();
 app.UseRouting();
