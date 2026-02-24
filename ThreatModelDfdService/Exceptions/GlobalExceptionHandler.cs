@@ -16,8 +16,8 @@ internal sealed class GlobalExceptionHandler(
 
             var statusCode = ex switch
             {
-                ApplicationException => StatusCodes.Status400BadRequest,
                 KeyNotFoundException => StatusCodes.Status404NotFound,
+                ArgumentException => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError
             };
             context.Response.StatusCode = statusCode;
