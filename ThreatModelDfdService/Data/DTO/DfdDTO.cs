@@ -4,5 +4,6 @@ public record DfdDTO
 (
     long Id,
     long? DfdParentId,
+    int LevelNumber,
     List<DfdElementResponseDTO> Elements
 );

@@ -12,7 +12,7 @@ public class DfdService(DfdElementService dfdElementService, MSSQLContext contex
     public DfdDTO CreateDfd()
     {
         Dfd dfd = Create(0, null);
-        return new DfdDTO(dfd.Id, dfd.DfdParentId, []);
+        return new DfdDTO(dfd.Id, dfd.DfdParentId, dfd.LevelNumber, []);
     }
 
     public async Task<List<DfdElementResponseDTO>> SyncElementsAsync(long dfdId, List<UpsertDfdElementDTO> dtos)
@@ -34,7 +34,7 @@ public class DfdService(DfdElementService dfdElementService, MSSQLContext contex
         process.DfdChildId = childDfd.Id;
         context.SaveChanges();
 
-        return new DfdDTO(childDfd.Id, childDfd.DfdParentId, []);
+        return new DfdDTO(childDfd.Id, childDfd.DfdParentId, childDfd.LevelNumber, []);
     }
 
     private Dfd Create(int LevelNumber, long? dfdParentId = null)
@@ -52,6 +52,6 @@ public class DfdService(DfdElementService dfdElementService, MSSQLContext contex
         Dfd? dfd = context.Dfds.Find(id);
         if (dfd == null) throw new Exception("DFD não encontrado.");
 
-        return new DfdDTO(dfd.Id, dfd.DfdParentId, dfdElementService.GetDfdElementsByDfdId(id));
+        return new DfdDTO(dfd.Id, dfd.DfdParentId, dfd.LevelNumber, dfdElementService.GetDfdElementsByDfdId(id));
     }
 }
