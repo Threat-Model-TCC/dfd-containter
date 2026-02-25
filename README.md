@@ -8,28 +8,28 @@ Esta seção detalha os procedimentos necessários para inicializar o ambiente c
 
 Para a execução deste projeto, é indispensável a instalação prévia das seguintes ferramentas:
 
-    Docker: Motor de containerização.
+- Docker: Motor de containerização.
 
-    Docker Compose: Orquestrador de múltiplos containers.
+- Docker Compose: Orquestrador de múltiplos containers.
 
-    Git: Sistema de controle de versão.
+- Git: Sistema de controle de versão.
 
 1.2. Procedimento de Instalação
 
-    Clonagem do Repositório:
+Clonagem do Repositório:
     Bash
 
     git clone https://github.com/Threat-Model-TCC/dfd-containter.git
     cd dfd-container
 
-    Inicialização dos Serviços:
-    Certifique-se de que as portas 5000 (API) e 1445 (SQL Server) não estejam sendo utilizadas por outros processos. Na raiz do diretório, execute:
+Inicialização dos Serviços:
+Certifique-se de que as portas 5000 (API) e 1445 (SQL Server) não estejam sendo utilizadas por outros processos. Na raiz do diretório, execute:
     Bash
 
     docker-compose up --build
 
-    Verificação de Inicialização:
-    O serviço dfd_backend possui uma dependência de integridade (healthcheck) em relação ao sqlserver. A API estará plenamente disponível para consumo assim que a mensagem Application started for exibida nos logs do console.
+Verificação de Inicialização:
+O serviço dfd_backend possui uma dependência de integridade (healthcheck) em relação ao sqlserver. A API estará plenamente disponível para consumo assim que a mensagem Application started for exibida nos logs do console.
 
 2. Documentação da API e Endpoints
 
