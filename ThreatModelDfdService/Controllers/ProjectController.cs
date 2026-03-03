@@ -20,4 +20,11 @@ public class ProjectController(ProjectService projectService) : ControllerBase
     {
         return Ok(projectService.GetProjectById(id));
     }
+
+    [HttpPut("{id}")]
+    public ActionResult<ProjectResponseDTO> UpdateProject(
+        [FromRoute] long id, [FromBody] UpdateProjectDTO dto)
+    {
+        return Ok(projectService.UpdateProject(id, dto));
+    }
 }

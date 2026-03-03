@@ -24,6 +24,21 @@ public class ProjectService(
         );
     }
 
+    public ProjectResponseDTO UpdateProject(long id, UpdateProjectDTO dto)
+    {
+        Project project = FindById(id);
+        project.Title = dto.Name;
+        project.Description = dto.Description;
+        projectRepository.Update(project);
+        return new ProjectResponseDTO(
+            project.Id,
+            project.Title,
+            project.Description,
+            project.ContextDiagramId,
+            project.CreatedAt
+        );
+    }
+
     private Project CreateNewProjectEntity(CreateProjectDTO dto, long ContextDiagramId)
     {
         Project project = new Project
