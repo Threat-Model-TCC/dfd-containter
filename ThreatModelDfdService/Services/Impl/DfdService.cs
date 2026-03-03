@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using ThreatModelDfdService.Configs;
 using ThreatModelDfdService.Data.DTO;
 using ThreatModelDfdService.Model.Context;
 using ThreatModelDfdService.Model.Entity;
@@ -37,7 +34,7 @@ public class DfdService(DfdElementService dfdElementService, MSSQLContext contex
         return new DfdDTO(childDfd.Id, childDfd.DfdParentId, childDfd.LevelNumber, []);
     }
 
-    private Dfd Create(int LevelNumber, long? dfdParentId = null)
+    public Dfd Create(int LevelNumber, long? dfdParentId = null)
     {
         Dfd dfd = context.Dfds.Add(new Dfd {
             LevelNumber = LevelNumber,
