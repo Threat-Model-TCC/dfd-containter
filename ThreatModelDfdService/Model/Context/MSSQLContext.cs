@@ -16,17 +16,11 @@ public class MSSQLContext : DbContext
     public DbSet<Process> Processes { get; set; }
     public DbSet<DataStore> DataStores { get; set; }
     public DbSet<Dfd> Dfds { get; set; }
+    public DbSet<Project> Projects { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
-        modelBuilder.ApplyConfiguration(new DfdElementConfiguration());
-        modelBuilder.ApplyConfiguration(new ProcessConfiguration());
-        modelBuilder.ApplyConfiguration(new ActorConfiguration());
-        modelBuilder.ApplyConfiguration(new DataStoreConfiguration());
-        modelBuilder.ApplyConfiguration(new DfdConfiguration());
-
-        // base.OnModelCreating(modelBuilder);
-        // // modelBuilder.ApplyConfigurationsFromAssembly(typeof(MSSQLContext).Assembly);
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(MSSQLContext).Assembly);
     }
 }
