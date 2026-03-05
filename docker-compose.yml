@@ -49,5 +49,19 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - MSSQLServerConnection__MSSQLServerConnectionString=Data Source=sqlserver,1433;Initial Catalog=dfd_db;User Id=sa;Password=SuaSenhaForte123!;Encrypt=True;TrustServerCertificate=True;
 
+  frontend:
+    build:
+      context: ./ThreatModelDfdView
+      dockerfile: Dockerfile
+      # Variável que passamos para o Vite na hora de construir a imagem
+      args:
+        VITE_API_URL: "http://localhost:5000"
+    container_name: dfd_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: always
+
 volumes:
   sql_data:
