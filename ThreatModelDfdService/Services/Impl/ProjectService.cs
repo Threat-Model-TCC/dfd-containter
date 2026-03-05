@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ThreatModelDfdService.Data.DTO;
 using ThreatModelDfdService.Model.Context;
 using ThreatModelDfdService.Model.Entity;
@@ -37,6 +38,28 @@ public class ProjectService(
             project.ContextDiagramId,
             project.CreatedAt
         );
+    }
+    public async Task<PagedProjectResponseDTO> GetPagedProjectsAsync(int page, int size)
+    {
+        var totalItems = await _context.Projects.CountAsync();
+        var totalPages = (int)Math.Ceiling(totalItems / (double)size);
+
+        var pagedList = await _context.Projects
+            .AsNoTracking()
+            .OrderByDescending(p => p.CreatedAt)
+            .Skip((page - 1) * size)
+            .Take(size)
+            .ToListAsync();
+
+        var projects = pagedList.Select(p => new ProjectResponseDTO(
+            p.Id,
+            p.Title,
+            p.Description,
+            p.ContextDiagramId,
+            p.CreatedAt
+        )).ToList();
+
+        return new PagedProjectResponseDTO(page, totalPages, projects);
     }
 
     private Project CreateNewProjectEntity(CreateProjectDTO dto, long ContextDiagramId)

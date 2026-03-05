@@ -21,6 +21,13 @@ public class ProjectController(ProjectService projectService) : ControllerBase
         return Ok(projectService.GetProjectById(id));
     }
 
+    [HttpGet]
+    public async Task<ActionResult<PagedProjectResponseDTO>> GetPagedProjects(
+        [FromQuery] int page = 1, [FromQuery] int size = 10)
+    {
+        return Ok(await projectService.GetPagedProjectsAsync(page, size));
+    }
+
     [HttpPut("{id}")]
     public ActionResult<ProjectResponseDTO> UpdateProject(
         [FromRoute] long id, [FromBody] UpdateProjectDTO dto)
