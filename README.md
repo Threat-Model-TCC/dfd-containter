@@ -26,7 +26,12 @@ Para a execução deste projeto, é indispensável a instalação prévia das se
 ## 1.2. Procedimento de Instalação
 
 ### Clonagem do Repositório
-    git clone https://github.com/Threat-Model-TCC/dfd-containter.git
+Opção 1: Via SSH
+    git clone git@github.com:Threat-Model-TCC/dfd-service.git
+    cd dfd-service
+
+Opção 2: Via HTTP
+    git clone https://github.com/Threat-Model-TCC/dfd-service.git
     cd dfd-service
 
 ### Inicialização dos Serviços:
