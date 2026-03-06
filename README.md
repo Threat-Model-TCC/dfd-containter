@@ -26,13 +26,11 @@ Para a execução deste projeto, é indispensável a instalação prévia das se
 ## 1.2. Procedimento de Instalação
 
 ### Clonagem do Repositório
-    bash
     git clone https://github.com/Threat-Model-TCC/dfd-containter.git
     cd dfd-service
 
 ### Inicialização dos Serviços:
 Certifique-se de que as portas 5000 (API), 1445 (SQL Server) e 3000 (front-end) não estejam sendo utilizadas por outros processos. Na raiz do diretório, execute:
-    Bash
 
     docker-compose up --build
 
@@ -62,6 +60,5 @@ A interface de documentação e testes da API é provida pelo Swagger (OpenAPI),
 
 # 3 Banco de dados
 Para acessar o banco de dados rode o comando:
-    bash
 
     docker exec -it sql2022_db /opt/mssql-tools18/bin/sqlcmd    -S localhost -U sa -P 'SuaSenhaForte123!' -d dfd_db -C
