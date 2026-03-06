@@ -34,6 +34,10 @@ Certifique-se de que as portas 5000 (API), 1445 (SQL Server) e 3000 (front-end) 
 
     docker-compose up --build
 
+Acesse a ferramenta localmente pela url:
+
+    localhost:3000/
+
 Verificação de Inicialização:
 O serviço dfd_backend possui uma dependência de integridade (healthcheck) em relação ao sqlserver. A API estará plenamente disponível para consumo assim que a mensagem Application started for exibida nos logs do console.
 
